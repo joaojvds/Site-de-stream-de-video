@@ -1,0 +1,27 @@
+@use '../colors';
+@use '../fonts';
+
+.container {
+	width: 100vw;
+	margin-top: 2rem;
+}
+
+.listTitle {
+	color: colors.$primary-text;
+	font-family: fonts.$barlow;
+	padding-left: 2rem;
+}
+
+.itemList {
+	margin-top: 1rem;
+}
+
+.icon {
+	* {
+		fill: colors.$primary-text;
+	}
+}
+
+.arrow {
+	background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, black 100%);
+}

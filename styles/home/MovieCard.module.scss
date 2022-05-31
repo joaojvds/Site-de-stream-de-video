@@ -1,0 +1,33 @@
+@use '../colors';
+@use '../fonts';
+
+.itemContainer {
+	display: flex;
+	flex-direction: column;
+	margin: 0.4rem;
+}
+
+.imgContainer {
+	position: relative;
+	height: 15em;
+	width: 10em;
+
+	.imgCover {
+		object-fit: contain;
+		width: 100% !important;
+		position: relative !important;
+		height: unset !important;
+		border-radius: 7px;
+
+		span {
+			position: unset !important;
+		}
+	}
+}
+
+.itemTitle {
+	color: colors.$neutral-solid;
+	font-family: fonts.$barlow;
+	font-size: 0.9rem;
+	margin: 0.4rem 0;
+}

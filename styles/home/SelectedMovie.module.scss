@@ -1,0 +1,139 @@
+@use '../colors';
+@use '../fonts';
+
+@mixin fontDefault($font: fonts.$barlow, $color: colors.$primary-text) {
+	font-family: $font;
+	color: $color;
+}
+
+.container {
+	display: flex;
+	justify-content: flex-start;
+	height: 35em;
+	width: 100vw;
+	position: relative;
+}
+
+.textInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 25em;
+	z-index: 2;
+	padding-left: 2rem;
+	padding-bottom: 5rem;
+	background: linear-gradient(
+		to right,
+		rgba(0, 0, 0, 0.85),
+		rgba(0, 0, 0, 0.65),
+		rgba(0, 0, 0, 0)
+	);
+
+	/* box-shadow: inset 111px 0px 38px 0px rgb(0 0 0 / 45%),
+		inset 186px 0px 38px 0px rgb(0 0 0 / 45%),
+		40px 0px 13px 0px rgb(0 0 0 / 45%);
+	-moz-box-shadow: inset 111px 0px 38px 0px rgb(0 0 0 / 45%),
+		inset 186px 0px 38px 0px rgb(0 0 0 / 45%),
+		40px 0px 13px 0px rgb(0 0 0 / 45%);
+	-webkit-box-shadow: inset 111px 0px 38px 0px rgb(0 0 0 / 45%),
+		inset 186px 0px 38px 0px rgb(0 0 0 / 45%),
+		40px 0px 13px 0px rgb(0 0 0 / 45%);
+	-khtml-box-shadow: inset 111px 0px 38px 0px rgb(0 0 0 / 45%),
+		inset 186px 0px 38px 0px rgb(0 0 0 / 45%),
+		40px 0px 13px 0px rgb(0 0 0 / 45%); */
+}
+
+.title {
+	@include fontDefault(fonts.$playfair-display);
+	font-size: 2rem;
+	font-weight: bold;
+	margin: 0.8rem 0;
+}
+
+.movieData {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.data {
+	@include fontDefault($color: colors.$neutral-solid);
+	font-size: 75%;
+	margin-right: 0.9rem;
+}
+
+.rating {
+	@extend .data;
+	background-color: #00af51;
+	color: #fff;
+	height: 1.125rem;
+	width: 1.125rem;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 0.125rem;
+	padding: 0.063rem;
+}
+
+.description {
+	@include fontDefault;
+	line-height: 1.6;
+	margin: 0.8rem 0;
+}
+
+.buttonContainer {
+	margin: 0.6rem 0;
+}
+
+// box-shadow:
+
+@mixin buttonTemplate(
+	$background-color: colors.$yellow-lumine,
+	$text-color: colors.$secondary-text,
+	$border-color: colors.$yellow-lumine
+) {
+	background-color: $background-color;
+	color: $text-color;
+	padding: 1em;
+	width: 10em;
+	border: 0.09rem $border-color solid;
+	border-radius: 0.3rem;
+}
+
+.watchButton {
+	@include buttonTemplate;
+	margin-right: 1rem;
+}
+
+.watchButton:hover {
+	cursor: pointer;
+}
+
+.listButton {
+	@include buttonTemplate(
+		transparent,
+		colors.$primary-text,
+		colors.$primary-text
+	);
+}
+
+.listButton:hover {
+	cursor: pointer;
+}
+
+.imgContainer {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	span {
+		z-index: 1;
+		box-shadow: inset 0 0 30px 30px rgba(0, 0, 0, 0.9) !important;
+		overflow: visible !important;
+	}
+}
+
+.imgBackground {
+	/* box-shadow: Inset 10px 10px 5px rgb(195, 67, 67);
+	-moz-box-shadow: Inset 10px 10px 5px rgb(195, 67, 67);
+	-webkit-box-shadow: Inset 10px 10px 5px rgb(195, 67, 67);
+	-khtml-box-shadow: Inset 10px 10px 5px rgb(195, 67, 67); */
+	box-shadow: inset 0 0 30px 30px rgba(0, 0, 0, 0.9) !important;
+}
