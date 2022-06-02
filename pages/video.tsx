@@ -1,11 +1,11 @@
 import React from 'react';
 
 export default function Video() {
-	const id = 'abcedc';
+	const id = '2Ak6vLxzHEySQH7HQiGuT';
 
 	return (
 		<video
-			src={`./api/video?videoID=${id}`}
+			src={`./api/${id}/video`}
 			width="800px"
 			height="auto"
 			controls
