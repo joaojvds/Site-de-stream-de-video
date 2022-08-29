@@ -1,5 +1,6 @@
 @use '../colors';
 @use '../fonts';
+@use '../skeleton-loading';
 
 @mixin fontDefault($font: fonts.$barlow, $color: colors.$primary-text) {
 	font-family: $font;
@@ -50,6 +51,11 @@
 	margin: 0.8rem 0;
 }
 
+.title:empty {
+	height: 2rem;
+	@include skeleton-loading.skeleton;
+}
+
 .movieData {
 	display: flex;
 	justify-content: flex-start;
@@ -59,6 +65,14 @@
 	@include fontDefault($color: colors.$neutral-solid);
 	font-size: 75%;
 	margin-right: 0.9rem;
+}
+
+.data:empty {
+	align-self: center;
+	height: 0.75rem;
+	@include skeleton-loading.skeleton;
+	width: 1.8rem;
+	border-radius: 0;
 }
 
 .rating {
@@ -77,13 +91,62 @@
 	@include fontDefault;
 	line-height: 1.6;
 	margin: 0.8rem 0;
+	height: 6rem;
+	overflow: auto;
+	text-overflow: ellipsis;
+	text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.description::-webkit-scrollbar {
+	width: 10px;
+}
+
+.description::-webkit-scrollbar-track {
+	background: rgba(colors.$background, 0.3);
+	border-radius: 1rem;
+}
+
+.description::-webkit-scrollbar-thumb {
+	background: colors.$scroll-default;
+	border: 1px colors.$scroll-hover solid;
+	border-radius: 1rem;
+}
+
+.description::-webkit-scrollbar-thumb:hover {
+	background: colors.$scroll-hover;
+}
+
+.loadingContainer {
+	display: flex;
+	flex-direction: column;
+	margin: 0.8rem 0;
+	height: 6rem;
+	justify-content: flex-start;
+	//padding-top: 0.4rem;
+}
+
+.loadingText {
+	@include skeleton-loading.skeleton;
+	width: 95%;
+	margin-top: 0.7rem;
+	height: 1rem;
+}
+
+.loadingText:nth-child(2) {
+	width: 73%;
+}
+
+.loadingText:nth-child(3) {
+	width: 83%;
+}
+
+.loadingText:nth-child(4) {
+	width: 48%;
 }
 
 .buttonContainer {
 	margin: 0.6rem 0;
 }
-
-// box-shadow:
 
 @mixin buttonTemplate(
 	$background-color: colors.$yellow-lumine,

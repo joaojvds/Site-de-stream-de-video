@@ -1,0 +1,314 @@
+@use '../colors';
+
+$vendors: ('-webkit', '-moz');
+
+%container {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	overflow-y: hidden;
+}
+
+.playerContainer {
+	@extend %container;
+}
+
+.disabled {
+	@extend %container;
+	cursor: none;
+}
+
+.player {
+	height: 100%;
+	width: 100%;
+}
+
+.navigationControlsContainer {
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	width: 100vw;
+	justify-content: flex-start;
+	background: linear-gradient(black, transparent);
+	padding: 1rem;
+	top: 0;
+	z-index: 20;
+	transform: translateY(-100%);
+	opacity: 0;
+	transition: transform 0.4s, opacity 0.3s;
+
+	.button {
+		margin: 0 1rem;
+
+		.icon {
+			height: 1.5rem;
+			width: 1.5rem;
+		}
+
+		span {
+			color: colors.$primary-text;
+			margin: 0.5rem;
+			text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+		}
+	}
+}
+
+.videoControlsContainer {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	width: 100vw;
+	background-color: transparent;
+	background: linear-gradient(transparent, black);
+	padding: 0 1rem;
+	bottom: 0;
+	z-index: 20;
+	transform: translateY(100%);
+	opacity: 0;
+	transition: transform 0.4s, opacity 0.3s;
+}
+
+.playerContainer:hover {
+	.navigationControlsContainer {
+		transform: translateY(0%);
+		opacity: 1;
+	}
+	.videoControlsContainer {
+		transform: translateY(0%);
+		opacity: 1;
+	}
+}
+
+.controls {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 1rem 0;
+	justify-content: space-between;
+}
+
+.button {
+	display: flex;
+	background-color: transparent;
+	border: 0;
+	padding: 0.5rem;
+	align-items: center;
+	outline: none;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.button:hover {
+	transform: scale(1.5);
+}
+
+.icon {
+	margin: 0 1rem;
+	* {
+		fill: colors.$primary-text;
+	}
+}
+
+.durationBarContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+}
+
+@mixin progressBar($thumb-size: 0.3125em) {
+	--range: calc(var(--max) - var(--min));
+	--ratio: calc((var(--value) - var(--min)) / var(--range));
+	--sx: calc(0.5 * #{$thumb-size} + var(--ratio) * (100% - #{$thumb-size}));
+
+	@each $vendor in $vendors {
+		#{$vendor}-appearance: none;
+	}
+	appearance: none;
+	height: 0.3125em;
+	width: 100%;
+	background-color: #4c4c4c;
+	border-radius: 0.3125em;
+	cursor: pointer;
+	transition: height 0.2s;
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
+	outline: none;
+}
+
+@mixin track($color: colors.$primary-color, $track-height: 0.3125em) {
+	height: $track-height;
+	border: 0;
+	border-radius: 0.3125em;
+	background-color: #4c4c4c;
+	background: linear-gradient($color, $color) 0 / var(--sx) 100% no-repeat,
+		#4c4c4c;
+	transition: height 0.2s;
+}
+
+@mixin thumb(
+	$color: colors.$primary-color,
+	$thumb-size: 0.3125em,
+	$track-height: 0.3125em
+) {
+	@each $vendor in $vendors {
+		#{$vendor}-appearance: none;
+	}
+	appearance: none;
+	height: $thumb-size;
+	width: $thumb-size;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	margin-top: calc(#{$track-height} * 0.5 - #{$thumb-size} * 0.5);
+	border-radius: 50%;
+	transition: 0.2s;
+	background-color: $color;
+	cursor: pointer;
+}
+
+@mixin thumb-hover($thumb-size: 0.8125em, $track-height: 0.3125em) {
+	width: $thumb-size;
+	height: $thumb-size;
+	margin-top: calc(#{$track-height} * 0.5 - #{$thumb-size} * 0.5);
+}
+
+.durationBar {
+	$thumb-height: 0.3125em;
+	$thumb-width: 0.3125em;
+	$track-height: 0.3125em;
+
+	@include progressBar;
+
+	margin: 0 1rem;
+
+	&::-webkit-slider-runnable-track {
+		@include track;
+	}
+	&::-moz-range-track {
+		@include track;
+	}
+	&::-ms-track {
+		@include track;
+	}
+
+	&::-webkit-slider-thumb {
+		@include thumb;
+	}
+	&::-moz-range-thumb {
+		@include thumb;
+	}
+	&::-ms-thumb {
+		@include thumb;
+	}
+}
+
+.durationBarContainer:hover {
+	$track-height: 0.5em;
+	$thumb-size: 0.8125em;
+
+	.durationBar {
+		height: $track-height;
+	}
+
+	.durationBar::-webkit-slider-runnable-track {
+		height: $track-height;
+	}
+	.durationBar::-moz-range-track {
+		height: $track-height;
+	}
+	.durationBar::-ms-track {
+		height: $track-height;
+	}
+
+	.durationBar::-webkit-slider-thumb {
+		@include thumb-hover($thumb-size, $track-height);
+	}
+	.durationBar::-moz-range-thumb {
+		@include thumb-hover($thumb-size, $track-height);
+	}
+	.durationBar::-ms-thumb {
+		@include thumb-hover($thumb-size, $track-height);
+	}
+}
+
+.controls {
+	div {
+		display: flex;
+	}
+}
+
+.volumeBar {
+	@include progressBar;
+	margin: 0;
+	width: 0;
+	transition: width 0.5s;
+
+	&::-webkit-slider-runnable-track {
+		@include track(colors.$secondary-color);
+	}
+	&::-moz-range-track {
+		@include track(colors.$secondary-color);
+	}
+	&::-ms-track {
+		@include track(colors.$secondary-color);
+	}
+
+	&::-webkit-slider-thumb {
+		@include thumb(colors.$secondary-color);
+		width: 0;
+	}
+	&::-moz-range-thumb {
+		@include thumb(colors.$secondary-color);
+		width: 0;
+	}
+	&::-ms-thumb {
+		@include thumb(colors.$secondary-color);
+		width: 0;
+	}
+}
+
+@mixin volume-thumb-hover() {
+	width: 0.5em;
+	height: 0.5em;
+}
+
+.volumeContainer {
+	$thumb-size: 0.5em;
+
+	display: flex;
+	align-items: center;
+
+	&:hover {
+		.volumeBar {
+			width: 100%;
+		}
+
+		.volumeBar::-webkit-slider-thumb {
+			@include thumb-hover($thumb-size);
+		}
+		.volumeBar::-moz-range-thumb {
+			@include thumb-hover($thumb-size);
+		}
+		.volumeBar::-ms-thumb {
+			@include thumb-hover($thumb-size);
+		}
+		> .button {
+			transform: scale(1.5);
+		}
+	}
+}
+
+.text {
+	color: colors.$primary-text;
+	text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+	@extend .text;
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+}

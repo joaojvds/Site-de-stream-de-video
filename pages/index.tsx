@@ -1,10 +1,12 @@
+import React, { useEffect, createContext, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.scss';
-import Link from 'next/link';
+
+import SelectedItem from '../contexts/SelectedItems';
 
 import SelectedMovie from '../components/home/SelectedMovie';
 import MovieList from '../components/home/MovieList';
+import SendMovie from '../components/home/SendMovie';
 
 export default function Home() {
 	return (
@@ -15,10 +17,13 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main className={styles.main}>
-				<SelectedMovie />
-				<MovieList />
-			</main>
+			<SelectedItem>
+				<main className={styles.main}>
+					<SelectedMovie />
+					<MovieList />
+					<SendMovie />
+				</main>
+			</SelectedItem>
 		</div>
 	);
 }

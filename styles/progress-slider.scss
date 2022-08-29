@@ -1,0 +1,59 @@
+@use './colors';
+
+$vendors: ('-webkit', '-moz');
+
+@mixin progressBar($thumb-size: 0.3125em) {
+	--range: calc(var(--max) - var(--min));
+	--ratio: calc((var(--value) - var(--min)) / var(--range));
+	--sx: calc(0.5 * #{$thumb-size} + var(--ratio) * (100% - #{$thumb-size}));
+
+	@each $vendor in $vendors {
+		#{$vendor}-appearance: none;
+	}
+	appearance: none;
+	height: 0.3125em;
+	width: 100%;
+	background-color: #4c4c4c;
+	border-radius: 0.3125em;
+	cursor: pointer;
+	transition: height 0.2s;
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
+	outline: none;
+}
+
+@mixin track($color: colors.$primary-color, $track-height: 0.3125em) {
+	height: $track-height;
+	border: 0;
+	border-radius: 0.3125em;
+	background-color: #4c4c4c;
+	background: linear-gradient($color, $color) 0 / var(--sx) 100% no-repeat,
+		#4c4c4c;
+	transition: height 0.2s;
+}
+
+@mixin thumb(
+	$color: colors.$primary-color,
+	$thumb-size: 0.3125em,
+	$track-height: 0.3125em
+) {
+	@each $vendor in $vendors {
+		#{$vendor}-appearance: none;
+	}
+	appearance: none;
+	height: $thumb-size;
+	width: $thumb-size;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	margin-top: calc(#{$track-height} * 0.5 - #{$thumb-size} * 0.5);
+	border-radius: 50%;
+	transition: 0.2s;
+	background-color: $color;
+	cursor: pointer;
+}
+
+@mixin thumb-hover($thumb-size: 0.8125em, $track-height: 0.3125em) {
+	width: $thumb-size;
+	height: $thumb-size;
+	margin-top: calc(#{$track-height} * 0.5 - #{$thumb-size} * 0.5);
+}

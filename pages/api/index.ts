@@ -2,9 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import postVideoStream from './_postVideoStream';
 import fs from 'fs';
 
-type Data = {
-	movieList: string[];
-};
+type Data = string[];
 
 export const config = {
 	api: {
@@ -27,7 +25,7 @@ export default function handler(
 					return res.status(500).end('internal server error');
 				}
 				/** Retorna uma lista em json com o nome de todos os diretórios na pasta. */
-				return res.status(200).json({ movieList: files });
+				return res.status(200).json(files);
 			});
 		case 'POST':
 			return postVideoStream(req, res);

@@ -1,10 +1,22 @@
 @use '../colors';
 @use '../fonts';
+@use '../skeleton-loading';
 
 .itemContainer {
 	display: flex;
 	flex-direction: column;
 	margin: 0.4rem;
+	background: none;
+	color: inherit;
+	border: 1px transparent solid;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.selectedItem {
+	border: 1px white solid;
 }
 
 .imgContainer {
@@ -17,6 +29,7 @@
 		width: 100% !important;
 		position: relative !important;
 		height: unset !important;
+		border: 1px transparent solid;
 		border-radius: 7px;
 
 		span {
@@ -25,9 +38,20 @@
 	}
 }
 
+.selectedItem {
+	border: 1px white solid !important;
+}
+
 .itemTitle {
 	color: colors.$neutral-solid;
 	font-family: fonts.$barlow;
 	font-size: 0.9rem;
 	margin: 0.4rem 0;
+}
+
+.itemTitle:empty {
+	@include skeleton-loading.skeleton;
+	height: 0.9rem;
+	width: 55%;
+	border-radius: 0;
 }

@@ -1,0 +1,24 @@
+@mixin skeleton {
+	//height: 2rem;
+	width: 70%;
+	background-color: #767676;
+	background: linear-gradient(
+			to right,
+			rgba(255, 255, 255, 0),
+			rgba(255, 255, 255, 0.5) 50%,
+			rgba(255, 255, 255, 0) 100%
+		),
+		#3b3b3b;
+	background-repeat: repeat-y;
+	background-size: 25%;
+	background-position: -100% 0;
+	border-radius: 5px;
+	opacity: 80%;
+	animation: load 1s linear infinite;
+}
+
+@keyframes load {
+	to {
+		background-position: 200% 0;
+	}
+}

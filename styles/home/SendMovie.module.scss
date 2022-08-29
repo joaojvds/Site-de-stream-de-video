@@ -1,0 +1,90 @@
+@use '../colors';
+@use '../fonts';
+
+.overlay {
+	display: flex;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 5;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.containerWindow {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: colors.$background;
+	padding: 0 1rem;
+	border: 1px solid colors.$primary-text;
+	border-radius: 5px;
+	z-index: 10;
+}
+
+.headerContainer {
+	display: flex;
+	padding: 1rem;
+	border-bottom: 1px solid colors.$primary-text;
+}
+
+.mainContainer {
+	display: flex;
+	flex-direction: row;
+	padding: 1rem;
+	border-bottom: 1px solid colors.$primary-text;
+}
+
+.imgContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.formContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.detailsContainer {
+	display: flex;
+	flex-direction: row;
+}
+
+.footerContainer {
+	display: flex;
+	padding: 1rem;
+	justify-content: flex-end;
+}
+
+.inputContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.imgContainer {
+	position: relative;
+	height: 15rem;
+	width: 10rem;
+	border: 1px solid colors.$primary-text;
+
+	.imgCover {
+		object-fit: contain;
+		width: 100% !important;
+		position: relative !important;
+		height: unset !important;
+		border: 1px transparent solid;
+		border-radius: 7px;
+
+		span {
+			position: unset !important;
+		}
+	}
+}
+
+.text {
+	color: colors.$primary-text;
+	font-family: fonts.$barlow;
+}

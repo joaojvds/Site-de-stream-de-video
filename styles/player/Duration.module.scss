@@ -1,0 +1,81 @@
+@use '../colors';
+@use '../progress-slider';
+@use 'PlayerContainer.module';
+
+.durationBarContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+}
+
+.durationBar {
+	$thumb-height: 0.3125em;
+	$thumb-size: 0.3125em;
+	$track-height: 0.3125em;
+
+	@include progress-slider.progressBar($thumb-size);
+
+	margin: 0 1rem;
+
+	&::-webkit-slider-runnable-track {
+		@include progress-slider.track(colors.$primary-color, $track-height);
+	}
+	&::-moz-range-track {
+		@include progress-slider.track(colors.$primary-color, $track-height);
+	}
+	&::-ms-track {
+		@include progress-slider.track(colors.$primary-color, $track-height);
+	}
+
+	&::-webkit-slider-thumb {
+		@include progress-slider.thumb(
+			colors.$primary-color,
+			$thumb-size,
+			$track-height
+		);
+	}
+	&::-moz-range-thumb {
+		@include progress-slider.thumb(
+			colors.$primary-color,
+			$thumb-size,
+			$track-height
+		);
+	}
+	&::-ms-thumb {
+		@include progress-slider.thumb(
+			colors.$primary-color,
+			$thumb-size,
+			$track-height
+		);
+	}
+}
+
+.durationBarContainer:hover {
+	$track-height: 0.5em;
+	$thumb-size: 0.8125em;
+
+	.durationBar {
+		height: $track-height;
+	}
+
+	.durationBar::-webkit-slider-runnable-track {
+		height: $track-height;
+	}
+	.durationBar::-moz-range-track {
+		height: $track-height;
+	}
+	.durationBar::-ms-track {
+		height: $track-height;
+	}
+
+	.durationBar::-webkit-slider-thumb {
+		@include progress-slider.thumb-hover($thumb-size, $track-height);
+	}
+	.durationBar::-moz-range-thumb {
+		@include progress-slider.thumb-hover($thumb-size, $track-height);
+	}
+	.durationBar::-ms-thumb {
+		@include progress-slider.thumb-hover($thumb-size, $track-height);
+	}
+}

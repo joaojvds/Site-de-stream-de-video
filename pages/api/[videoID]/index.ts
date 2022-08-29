@@ -1,17 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 
-type Data =
-	| string
-	| {
-			id: string;
-			title: string;
-			description: string;
-			rating: string;
-			duration: string;
-			releaseDate: string;
-			videoType: string;
-	  };
+type Data = {
+	id: string;
+	title: string;
+	description: string;
+	rating: string;
+	duration: string;
+	releaseDate: string;
+	videoType: string;
+};
 
 export const config = {
 	api: {

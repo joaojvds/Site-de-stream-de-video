@@ -1,0 +1,88 @@
+@use '../colors';
+@use '../progress-slider';
+@use 'PlayerContainer.module';
+
+.volumeContainer {
+	$thumb-size: 0.5em;
+	$track-height: 0.3125em;
+
+	display: flex;
+	align-items: center;
+
+	.button {
+		margin-left: 00.25rem;
+	}
+
+	div {
+		display: flex;
+		align-content: center;
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.3s;
+	}
+
+	&:hover {
+		div {
+			transform: scaleX(1);
+		}
+
+		.volumeBar::-webkit-slider-thumb {
+			@include progress-slider.thumb-hover($thumb-size, $track-height);
+		}
+		.volumeBar::-moz-range-thumb {
+			@include progress-slider.thumb-hover($thumb-size, $track-height);
+		}
+		.volumeBar::-ms-thumb {
+			@include progress-slider.thumb-hover($thumb-size, $track-height);
+		}
+		.button {
+			.icon {
+				transform: scale(2);
+			}
+		}
+	}
+}
+
+.volumeBar {
+	$thumb-size: 0.3125em;
+	$thumb-height: 0.3125em;
+
+	@include progress-slider.progressBar;
+
+	margin: 0;
+
+	&::-webkit-slider-runnable-track {
+		@include progress-slider.track(colors.$secondary-color, $thumb-height);
+	}
+	&::-moz-range-track {
+		@include progress-slider.track(colors.$secondary-color, $thumb-height);
+	}
+	&::-ms-track {
+		@include progress-slider.track(colors.$secondary-color, $thumb-height);
+	}
+
+	&::-webkit-slider-thumb {
+		@include progress-slider.thumb(
+			colors.$secondary-color,
+			$thumb-size,
+			$thumb-height
+		);
+		width: 0;
+	}
+	&::-moz-range-thumb {
+		@include progress-slider.thumb(
+			colors.$secondary-color,
+			$thumb-size,
+			$thumb-height
+		);
+		width: 0;
+	}
+	&::-ms-thumb {
+		@include progress-slider.thumb(
+			colors.$secondary-color,
+			$thumb-size,
+			$thumb-height
+		);
+		width: 0;
+	}
+}
