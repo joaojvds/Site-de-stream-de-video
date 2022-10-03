@@ -1,0 +1,20 @@
+@use './colors';
+
+%scrollbar::-webkit-scrollbar {
+	width: 10px;
+}
+
+%scrollbar::-webkit-scrollbar-track {
+	background: rgba(colors.$background, 0.3);
+	border-radius: 1rem;
+}
+
+%scrollbar::-webkit-scrollbar-thumb {
+	background: colors.$scroll-default;
+	border: 1px colors.$scroll-hover solid;
+	border-radius: 1rem;
+}
+
+%scrollbar::-webkit-scrollbar-thumb:hover {
+	background: colors.$scroll-hover;
+}

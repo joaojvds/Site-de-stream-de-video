@@ -12,16 +12,18 @@ function MovieList() {
 
 	return (
 		<div className={styles.container}>
-			<span className={styles.listTitle}>Novidades</span>
+			<div className={styles.listTitleContainer}>
+				<span className={styles.listTitle}>Minha Lista:</span>
+				<AddCard />
+			</div>
 			<ScrollMenu
 				LeftArrow={ArrowLeft}
 				RightArrow={ArrowRight}
 				scrollContainerClassName={styles.itemList}
 			>
 				{itemList.map((item) => (
-					<MovieCard key={item} videoID={item} />
+					<MovieCard itemId={item} key={item} />
 				))}
-				<AddCard />
 			</ScrollMenu>
 		</div>
 	);
@@ -37,8 +39,8 @@ function ArrowLeft() {
 
 	return (
 		<button
-			disabled={disable}
-			className={styles.arrowButton}
+			disabled={isFirstItemVisible}
+			className={`${styles.arrowButton} ${styles.left}`}
 			onClick={() => scrollPrev()}
 		>
 			<FaChevronLeft className={styles.icon} />
@@ -57,8 +59,8 @@ function ArrowRight() {
 
 	return (
 		<button
-			disabled={disable}
-			className={styles.arrowButton}
+			disabled={isLastItemVisible}
+			className={`${styles.arrowButton} ${styles.right}`}
 			onClick={() => scrollNext()}
 		>
 			<FaChevronRight className={styles.icon} />

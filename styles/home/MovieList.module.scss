@@ -6,14 +6,29 @@
 	margin-top: 2rem;
 }
 
-.listTitle {
-	color: colors.$primary-text;
-	font-family: fonts.$barlow;
+.listTitleContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding-left: 2rem;
+	padding-right: 2rem;
+
+	.listTitle {
+		color: colors.$primary-text;
+		font-family: fonts.$playfair-display;
+		font-size: 1.3rem;
+		font-weight: bold;
+	}
 }
 
 .itemList {
 	margin-top: 1rem;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .icon {
@@ -23,15 +38,32 @@
 }
 
 .arrowButton {
-	background: none;
 	color: inherit;
-	border: 1px transparent solid;
-	padding: 0;
+	border: 0;
+	padding: 1rem;
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+	opacity: 1;
+	transition: opacity 50ms;
+
+	&:disabled {
+		opacity: 0;
+	}
 }
 
-.arrow {
-	background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, black 100%);
+.left {
+	background: linear-gradient(
+		90deg,
+		rgba(0, 0, 0, 0.8881302521008403) 0%,
+		rgba(0, 0, 0, 0) 100%
+	);
+}
+
+.right {
+	background: linear-gradient(
+		90deg,
+		rgba(0, 0, 0, 0) 0%,
+		rgba(0, 0, 0, 0.8881302521008403) 100%
+	);
 }

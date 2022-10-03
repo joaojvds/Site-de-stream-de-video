@@ -1,9 +1,9 @@
 @use '../colors';
+@use '../fonts';
 
 .itemContainer {
 	display: flex;
 	flex-direction: column;
-	margin: 0.4rem;
 	background: none;
 	color: inherit;
 	border: 1px transparent solid;
@@ -15,23 +15,21 @@
 
 .imgContainer {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	height: 15em;
-	width: 10em;
+	padding: 0.5rem 0.5rem;
 	background-color: colors.$card-background;
 	border-radius: 7px;
 
 	.icon {
 		fill: white;
-		height: 4rem;
-		width: 4rem;
+		height: 2rem;
+		width: 2rem;
 	}
 
 	.iconLabel {
-		margin-top: 0.5rem;
-		color: white;
+		color: colors.$primary-text;
+		font-family: fonts.$barlow;
 	}
 }

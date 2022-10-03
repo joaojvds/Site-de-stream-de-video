@@ -1,5 +1,6 @@
 @use '../colors';
 @use '../fonts';
+@use '../scrollbar';
 
 .overlay {
 	display: flex;
@@ -20,71 +21,253 @@
 	transform: translate(-50%, -50%);
 	background-color: colors.$background;
 	padding: 0 1rem;
-	border: 1px solid colors.$primary-text;
-	border-radius: 5px;
+	border: 1px solid #3d3d3d;
+	border-radius: 20px;
 	z-index: 10;
 }
 
 .headerContainer {
 	display: flex;
 	padding: 1rem;
-	border-bottom: 1px solid colors.$primary-text;
+	border-bottom: 1px solid colors.$file-border;
 }
 
 .mainContainer {
 	display: flex;
 	flex-direction: row;
 	padding: 1rem;
-	border-bottom: 1px solid colors.$primary-text;
 }
 
 .imgContainer {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+
+	margin: 1rem;
+}
+
+.coverContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	height: 15rem;
+	width: 10rem;
+	border: 1px solid colors.$file-border;
+	margin: 1rem;
+	cursor: pointer;
+	user-select: none;
+
+	input {
+		display: none;
+	}
+}
+
+.thumbContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	height: 10rem;
+	width: 15rem;
+	border: 1px solid colors.$file-border;
+	margin: 1rem;
+	cursor: pointer;
+	user-select: none;
+
+	input {
+		display: none;
+	}
+}
+
+.imgIcon {
+	fill: colors.$file-border;
+	height: 2rem;
+	width: 2rem;
+}
+
+.imgCover {
+	object-fit: contain;
+	width: 100% !important;
+	position: relative !important;
+	height: unset !important;
+	border: 1px transparent solid;
 }
 
 .formContainer {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.textInput {
+	height: 2rem;
+	color: colors.$primary-text;
+	background-color: transparent;
+	border: 1px solid colors.$file-border;
+	border-radius: 5px;
+}
+
+.textAreaInput {
+	@extend %scrollbar;
+	height: 7.5rem;
+	color: colors.$primary-text;
+	background-color: transparent;
+	border: 1px solid colors.$file-border;
+	border-radius: 5px;
+	resize: none;
+}
+
+.videoContainer {
+	display: flex;
+	flex-direction: column;
+	justify-self: flex-end;
+	justify-content: center;
+	align-items: center;
+	height: 8rem;
+	border: 1px solid colors.$file-border;
+	cursor: pointer;
+	user-select: none;
+
+	input {
+		display: none;
+	}
 }
 
 .detailsContainer {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
+
+	div {
+		width: 23%;
+	}
+}
+
+.progressContainer {
+	width: 100%;
+	background-color: #575757;
+	height: 0.3rem;
+	//transform: scaleY(0);
+	transform-origin: bottom;
+	animation: progress-start 0.25s linear;
+}
+
+.progressDisable {
+	width: 100%;
+	background-color: #575757;
+	height: 0.3rem;
+	transform-origin: bottom;
+	transform: scaleY(0);
+	animation: progress-end 0.25s linear;
+}
+
+@keyframes progress-start {
+	0% {
+		transform: scaleY(0);
+	}
+	100% {
+		transform: scaleY(1);
+	}
+}
+
+@keyframes progress-end {
+	0% {
+		transform: scaleY(1);
+	}
+	100% {
+		transform: scaleY(0);
+	}
+}
+
+.progress {
+	background-color: #84dcdc;
+	width: 0%;
+	height: 100%;
+	-webkit-transition: width ease-in-out;
+	-moz-transition: width ease-in-out;
+	-o-transition: width ease-in-out;
+	transition: width ease-in-out;
+	//transform: scaleY(0);
 }
 
 .footerContainer {
 	display: flex;
 	padding: 1rem;
 	justify-content: flex-end;
+	border-top: 1px solid colors.$file-border;
 }
 
 .inputContainer {
 	display: flex;
 	flex-direction: column;
-}
 
-.imgContainer {
-	position: relative;
-	height: 15rem;
-	width: 10rem;
-	border: 1px solid colors.$primary-text;
-
-	.imgCover {
-		object-fit: contain;
-		width: 100% !important;
-		position: relative !important;
-		height: unset !important;
-		border: 1px transparent solid;
-		border-radius: 7px;
-
-		span {
-			position: unset !important;
-		}
+	span {
+		margin-bottom: 0.25rem;
 	}
 }
 
 .text {
 	color: colors.$primary-text;
 	font-family: fonts.$barlow;
+}
+
+.fileText {
+	@extend .text;
+	color: colors.$file-border;
+}
+
+.message {
+	@extend .text;
+	height: 1rem;
+	margin-bottom: 0.5rem;
+	align-self: center;
+}
+
+.success {
+	color: colors.$success;
+}
+
+.error {
+	color: colors.$error;
+}
+
+%button {
+	padding: 1em;
+	width: 10em;
+	border-width: 0.09rem;
+	border-radius: 0.3rem;
+	border-style: solid;
+	font-family: fonts.$barlow;
+	cursor: pointer;
+}
+
+.sendButton {
+	@extend %button;
+
+	margin-right: 1rem;
+	background-color: colors.$yellow-lumine;
+	color: colors.$secondary-text;
+	border-color: colors.$yellow-lumine;
+
+	svg {
+		color: inherit;
+		margin-right: 0.4rem;
+	}
+}
+
+.sendButton:active {
+	background-color: darken(colors.$yellow-lumine, 10%);
+	border-color: darken(colors.$yellow-lumine, 10%);
+}
+
+.cancelButton {
+	@extend %button;
+
+	margin-right: 1rem;
+	background-color: transparent;
+	color: colors.$white;
+	border-color: colors.$file-border;
 }

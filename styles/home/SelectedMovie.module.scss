@@ -1,6 +1,7 @@
 @use '../colors';
 @use '../fonts';
 @use '../skeleton-loading';
+@use '../scrollbar';
 
 @mixin fontDefault($font: fonts.$barlow, $color: colors.$primary-text) {
 	font-family: $font;
@@ -29,19 +30,6 @@
 		rgba(0, 0, 0, 0.65),
 		rgba(0, 0, 0, 0)
 	);
-
-	/* box-shadow: inset 111px 0px 38px 0px rgb(0 0 0 / 45%),
-		inset 186px 0px 38px 0px rgb(0 0 0 / 45%),
-		40px 0px 13px 0px rgb(0 0 0 / 45%);
-	-moz-box-shadow: inset 111px 0px 38px 0px rgb(0 0 0 / 45%),
-		inset 186px 0px 38px 0px rgb(0 0 0 / 45%),
-		40px 0px 13px 0px rgb(0 0 0 / 45%);
-	-webkit-box-shadow: inset 111px 0px 38px 0px rgb(0 0 0 / 45%),
-		inset 186px 0px 38px 0px rgb(0 0 0 / 45%),
-		40px 0px 13px 0px rgb(0 0 0 / 45%);
-	-khtml-box-shadow: inset 111px 0px 38px 0px rgb(0 0 0 / 45%),
-		inset 186px 0px 38px 0px rgb(0 0 0 / 45%),
-		40px 0px 13px 0px rgb(0 0 0 / 45%); */
 }
 
 .title {
@@ -89,31 +77,13 @@
 
 .description {
 	@include fontDefault;
+	@extend %scrollbar;
 	line-height: 1.6;
 	margin: 0.8rem 0;
 	height: 6rem;
 	overflow: auto;
 	text-overflow: ellipsis;
 	text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-}
-
-.description::-webkit-scrollbar {
-	width: 10px;
-}
-
-.description::-webkit-scrollbar-track {
-	background: rgba(colors.$background, 0.3);
-	border-radius: 1rem;
-}
-
-.description::-webkit-scrollbar-thumb {
-	background: colors.$scroll-default;
-	border: 1px colors.$scroll-hover solid;
-	border-radius: 1rem;
-}
-
-.description::-webkit-scrollbar-thumb:hover {
-	background: colors.$scroll-hover;
 }
 
 .loadingContainer {

@@ -9,7 +9,7 @@ import { getPlaiceholder } from 'plaiceholder';
 import { getItemInfo } from '../../services/axios';
 
 type Props = {
-	videoID: string;
+	itemId: string;
 };
 
 type Info = {
@@ -38,7 +38,7 @@ type Info = {
 export default function MovieCard(props: Props) {
 	const selectedItem = useContext(SelectedItemContext);
 	const setItem = useContext(SetItemContext);
-	const { videoID } = props;
+	const videoID = props.itemId;
 
 	const [imageSrc, setImageSrc] = useState(`/api/${videoID}/cover`);
 	const [info, setInfo] = useState<Info>();
