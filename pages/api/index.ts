@@ -21,7 +21,15 @@ export default function handler(
 			return fs.readdir('./videos', (error, files) => {
 				/** Checa se o caminho é valido. */
 				if (error) {
-					if (error.code == 'ENOENT') return res.status(404).end('not found');
+					if (error.code == 'ENOENT') {
+						try {
+							/** Cria a pasta caso não encontre */
+							fs.mkdirSync('./video', 0o777);
+							return res.status(200).json([]);
+						} catch (err) {
+							return res.status(500).end('internal server error');
+						}
+					}
 					return res.status(500).end('internal server error');
 				}
 				/** Retorna uma lista em json com o nome de todos os diretórios na pasta. */
